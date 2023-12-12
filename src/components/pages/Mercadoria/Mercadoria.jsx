@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Mercadoria.module.css";
 import {
   Grid,
@@ -12,7 +12,6 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import useMercadoriaClients from "../../../clients/MercadoriaClient/useMercadoriaClient";
-import AlertError from "../../Shared/Alerts/AlertError/AlertError";
 import AlertSucess from "../../Shared/Alerts/AlertSucess/AlertSucess";
 
 const nome = "Nome";
@@ -32,16 +31,19 @@ const DEFAULT_OBJECT = {
 
 function Mercadoria() {
   const clientsMercadoria = useMercadoriaClients();
+  const [mensagemRetornada, setMensagemRetornada] = useState("");
+  const [sucesso, setSucesso] = useState(false);
 
   const enviarMercadoria = (data) => {
     clientsMercadoria()
       .cadastrarMercadoria(data)
       .then(
         () => {
-          AlertSucess();
+          setSucesso(true);
+          setMensagemRetornada("Cadastro realizado com sucesso!");
         },
-        () => {
-          AlertError();
+        (error) => {
+          console.error("Erro na requisição:", error);
         }
       );
   };
@@ -239,6 +241,7 @@ function Mercadoria() {
           </Box>
         </Box>
       </Box>
+      {sucesso && <AlertSucess mensagem={mensagemRetornada} />}
     </>
   );
 }

@@ -15,7 +15,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import useEntradaClientes from "../../../clients/EntradaClient/useEntradaClient";
 import useClientMercadoria from "../../../clients/MercadoriaClient/useMercadoriaClient";
-import AlertError from "../../Shared/Alerts/AlertError/AlertError";
 import AlertSucess from "../../Shared/Alerts/AlertSucess/AlertSucess";
 
 const quantidade = "Quantidade";
@@ -35,6 +34,8 @@ function Entrada() {
   const clientesEntrada = useEntradaClientes();
   const clienteMercadoria = useClientMercadoria();
   const [mercadorias, setMercadorias] = useState([]);
+  const [mensagemRetornada, setMensagemRetornada] = useState("");
+  const [sucesso, setSucesso] = useState(false);
 
   const buscarMercadorias = () => {
     clienteMercadoria()
@@ -43,8 +44,8 @@ function Entrada() {
         (response) => {
           setMercadorias(response?.data);
         },
-        () => {
-          AlertError();
+        (error) => {
+          console.error("Erro na requisição:", error);
         }
       );
   };
@@ -62,10 +63,11 @@ function Entrada() {
       .cadastrarEntrada(formData)
       .then(
         () => {
-          AlertSucess();
+          setSucesso(true);
+          setMensagemRetornada("Cadastro realizado com sucesso!");
         },
-        () => {
-          AlertError();
+        (error) => {
+          console.error("Erro na requisição:", error);
         }
       );
   };
@@ -234,6 +236,7 @@ function Entrada() {
           </Box>
         </Box>
       </Box>
+      {sucesso && <AlertSucess mensagem={mensagemRetornada} />}
     </>
   );
 }

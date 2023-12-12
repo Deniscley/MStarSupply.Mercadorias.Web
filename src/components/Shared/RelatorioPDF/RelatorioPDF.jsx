@@ -37,8 +37,8 @@ const RelatorioPDF = () => {
         (response) => {
           setEntradas(response?.data);
         },
-        () => {
-          // AlertError();
+        (error) => {
+          console.error("Erro na requisição:", error);
         }
       );
   };
@@ -50,8 +50,8 @@ const RelatorioPDF = () => {
         (response) => {
           setSaidas(response?.data);
         },
-        () => {
-          // AlertError();
+        (error) => {
+          console.error("Erro na requisição:", error);
         }
       );
   };
@@ -79,7 +79,7 @@ const RelatorioPDF = () => {
         canvas.width * 0.35,
         canvas.height * 0.35
       );
-      pdf.save("relatorio_mensal.pdf");
+      pdf.save("relatorio_entrada.pdf");
     });
   };
 
@@ -97,7 +97,7 @@ const RelatorioPDF = () => {
         canvas.width * 0.35,
         canvas.height * 0.35
       );
-      pdf.save("relatorio_mensal.pdf");
+      pdf.save("relatorio_saida.pdf");
     });
   };
 
