@@ -24,7 +24,7 @@ const cadastrar = "Cadastrar";
 
 const DEFAULT_OBJECT = {
   nome: "",
-  numero: "",
+  numeroRegistro: "",
   fabricante: "",
   tipo: "",
   descricao: "",
@@ -50,7 +50,9 @@ function Mercadoria() {
     initialValues: { ...DEFAULT_OBJECT },
     validationSchema: Yup.object({
       nome: Yup.string().required("O campo nome é obrigatório"),
-      numero: Yup.number().required("O campo número de registro é obrigatório"),
+      numeroRegistro: Yup.number().required(
+        "O campo número de registro é obrigatório"
+      ),
       fabricante: Yup.string().required("O campo fabricante é obrigatório"),
       tipo: Yup.string().required("O campo tipo é obrigatório"),
       descricao: Yup.string().required("O campo descrição é obrigatório"),
@@ -65,13 +67,8 @@ function Mercadoria() {
     },
   });
 
-  const submeterMercadoria = () => {
-    formik.submitForm();
-  };
-
   return (
     <>
-      {/* <form onSubmit={formik.handleSubmit}> */}
       <Box className={styles.container} ml={3} mr={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={12} mt={5}>
@@ -112,21 +109,27 @@ function Mercadoria() {
               <FormControl fullWidth>
                 <Box sx={{ paddingTop: "1rem" }}>
                   <TextField
-                    id="numero"
-                    title="Numero"
+                    id="numeroRegistro"
+                    title="Numero Registro"
                     type="number"
                     minRows={1}
                     fullWidth
                     color="primary"
                     inputProps={{ maxLength: 15, min: 1 }}
-                    {...formik.getFieldProps("numero")}
-                    error={formik.touched.numero && !!formik.errors.numero}
+                    {...formik.getFieldProps("numeroRegistro")}
+                    error={
+                      formik.touched.numero && !!formik.errors.numeroRegistro
+                    }
                   />
                   <FormHelperText
-                    hidden={!formik.touched.numero || !formik.errors.numero}
-                    error={formik.touched.numero && !!formik.errors.numero}
+                    hidden={
+                      !formik.touched.numero || !formik.errors.numeroRegistro
+                    }
+                    error={
+                      formik.touched.numero && !!formik.errors.numeroRegistro
+                    }
                   >
-                    {formik.errors.numero}
+                    {formik.errors.numeroRegistro}
                   </FormHelperText>
                 </Box>
               </FormControl>
@@ -229,14 +232,13 @@ function Mercadoria() {
               color="primary"
               title="Adicionar"
               fullWidth
-              onClick={submeterMercadoria}
+              onClick={() => formik.submitForm()}
             >
               {cadastrar}
             </Button>
           </Box>
         </Box>
       </Box>
-      {/* </form> */}
     </>
   );
 }

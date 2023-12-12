@@ -4,29 +4,29 @@ import axios from "axios";
 const useMercadoriaClients = () => {
   const cadastrarMercadoria = useCallback(
     (data) =>
-      axios.put(`${process.env.URI}/api/mercadoria/inserir-mercadoria`, data),
+      axios.post(
+        "https://localhost:44304/api/mercadoria/inserir-mercadoria",
+        data
+      ),
     []
   );
 
-  const cadastrarEntrada = useCallback(
-    (data) =>
-      axios.put(`${process.env.URI}/api/mercadoria/inserir-entrada`, data),
-    []
-  );
-
-  const cadastrarSaida = useCallback(
-    (data) =>
-      axios.put(`${process.env.URI}/api/mercadoria/inserir-saida`, data),
+  const retornarMercadorias = useCallback(
+    (id) =>
+      axios
+        .get("https://localhost:44304/api/mercadoria/obter-todas-mercadorias")
+        .then((response) =>
+          response?.data ? response : { data: { ...response } }
+        ),
     []
   );
 
   return useCallback(
     () => ({
       cadastrarMercadoria,
-      cadastrarEntrada,
-      cadastrarSaida,
+      retornarMercadorias,
     }),
-    [cadastrarMercadoria, cadastrarEntrada, cadastrarSaida]
+    [cadastrarMercadoria, retornarMercadorias]
   );
 };
 

@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import styles from "./Entrada.module.css";
 import {
   Grid,
@@ -12,10 +13,10 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import useMercadoriaClients from "../../../clients/MercadoriaClient/useMercadoriaClient";
+import useEntradaClientes from "../../../clients/EntradaClient/useEntradaClient";
+import useClientMercadoria from "../../../clients/MercadoriaClient/useMercadoriaClient";
 import AlertError from "../../Shared/Alerts/AlertError/AlertError";
 import AlertSucess from "../../Shared/Alerts/AlertSucess/AlertSucess";
-// import DropdownSelectOne from "../../Shared/DropdownSelectOne/DropdownSelectOne";
 
 const quantidade = "Quantidade";
 const dataHora = "Data e Hora";
@@ -25,35 +26,40 @@ const mercadoria = "Mercadoria";
 
 const DEFAULT_OBJECT = {
   quantidade: "",
-  dataHora: "",
+  data: "",
   local: "",
-  mercadoriaId: "",
-};
-
-export const mercadorias = {
-  data: [
-    {
-      nome: "Mercadoria 3",
-      mercadoriaId: "4fd192da-5f74-494e-8e17-f2f73c21ba1b",
-    },
-    {
-      nome: "Mercadoria 4",
-      mercadoriaId: "481503b5-f581-4523-b388-1fc5a83cc57b",
-    },
-    {
-      nome: "Mercadoria 5",
-      mercadoriaId: "2c30cfc9-c3b4-4eca-8c0a-790042ed91d2",
-    },
-  ],
+  MercadoriaId: "",
 };
 
 function Entrada() {
-  const clientsEntrada = useMercadoriaClients();
-  // const [valueType, setValueType] = useState("");
+  const clientesEntrada = useEntradaClientes();
+  const clienteMercadoria = useClientMercadoria();
+  const [mercadorias, setMercadorias] = useState([]);
 
-  const enviarEntrada = (data) => {
-    clientsEntrada()
-      .cadastrarMercadoria(data)
+  const buscarMercadorias = () => {
+    clienteMercadoria()
+      .retornarMercadorias()
+      .then(
+        (response) => {
+          setMercadorias(response.data);
+        },
+        () => {
+          AlertError();
+        }
+      );
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await buscarMercadorias();
+    };
+
+    fetchData().catch((error) => error.message);
+  }, []);
+
+  const enviarEntrada = (formData) => {
+    clientesEntrada()
+      .cadastrarEntrada(formData)
       .then(
         () => {
           AlertSucess();
@@ -68,9 +74,9 @@ function Entrada() {
     initialValues: { ...DEFAULT_OBJECT },
     validationSchema: Yup.object({
       quantidade: Yup.number().required("O campo quantidade é obrigatório"),
-      dataHora: Yup.date().required("O campo data e hora é obrigatório"),
+      data: Yup.date().required("O campo data e hora é obrigatório"),
       local: Yup.string().required("O campo local é obrigatório"),
-      mercadoriaId: Yup.string().required("O campo mercadoria é obrigatório"),
+      MercadoriaId: Yup.string().required("O campo mercadoria é obrigatório"),
     }),
     onSubmit: (data, { resetForm }) => {
       const values = {
@@ -81,10 +87,6 @@ function Entrada() {
       resetForm({ values: "" });
     },
   });
-
-  const submeterEntrada = () => {
-    formik.submitForm();
-  };
 
   return (
     <>
@@ -139,14 +141,14 @@ function Entrada() {
                     name="birthdatetime"
                     fullWidth
                     className={styles.inputData}
-                    {...formik.getFieldProps("dataHora")}
-                    error={formik.touched.dataHora && !!formik.errors.dataHora}
+                    {...formik.getFieldProps("data")}
+                    error={formik.touched.data && !!formik.errors.data}
                   />
                   <FormHelperText
-                    hidden={!formik.touched.dataHora || !formik.errors.dataHora}
-                    error={formik.touched.dataHora && !!formik.errors.dataHora}
+                    hidden={!formik.touched.data || !formik.errors.data}
+                    error={formik.touched.data && !!formik.errors.data}
                   >
-                    {formik.errors.dataHora}
+                    {formik.errors.data}
                   </FormHelperText>
                 </Box>
               </FormControl>
@@ -186,35 +188,18 @@ function Entrada() {
                 <Typography variant="body2">{mercadoria}</Typography>
               </Box>
               <FormControl fullWidth>
-                {/* <DropdownSelectOne
-                  id="idMercadoria"
-                  title="Mercadoria"
-                  options={mercadorias.data}
-                  {...formik.getFieldProps("idMercadoria")}
-                  // onClick={(e) => {
-                  //   const { value } = e.target;
-                  //   setValueType(value);
-                  // }}
-                  error={
-                    formik.touched.idMercadoria && !!formik.errors.idMercadoria
-                  }
-                  helpertext={
-                    formik.touched.idMercadoria && formik.errors.idMercadoria
-                  }
-                /> */}
                 <Box sx={{ paddingTop: "1rem" }}>
                   <select
-                    id="idMercadoria"
+                    id="MercadoriaId"
                     title="Mercadoria"
                     className={styles.inputSelect}
-                    {...formik.getFieldProps("idMercadoria")}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.meuCampoSelecao}
                   >
                     <option value="">Selecione...</option>
                     {mercadorias.data.map((option) => (
-                      <option
-                        key={option.IdMercadoria}
-                        value={option.IdMercadoria}
-                      >
+                      <option key={option.id} value={option.id}>
                         {option.nome}
                       </option>
                     ))}
@@ -222,13 +207,13 @@ function Entrada() {
                 </Box>
                 <FormHelperText
                   hidden={
-                    !formik.touched.idMercadoria || !formik.errors.idMercadoria
+                    !formik.touched.MercadoriaId || !formik.errors.MercadoriaId
                   }
                   error={
-                    formik.touched.idMercadoria && !!formik.errors.idMercadoria
+                    formik.touched.MercadoriaId && !!formik.errors.MercadoriaId
                   }
                 >
-                  {formik.errors.idMercadoria}
+                  {formik.errors.MercadoriaId}
                 </FormHelperText>
               </FormControl>
             </Box>
@@ -242,7 +227,7 @@ function Entrada() {
               color="primary"
               title="Adicionar"
               fullWidth
-              onClick={submeterEntrada}
+              onClick={() => formik.submitForm()}
             >
               {cadastrar}
             </Button>
