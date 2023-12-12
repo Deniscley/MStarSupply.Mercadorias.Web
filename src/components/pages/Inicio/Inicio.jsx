@@ -12,10 +12,12 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
+import useUtils from "../../../hooks/useUtils";
 
 function Inicio() {
   const clientesEntrada = useEntradaClientes();
   const clientesSaida = useSaidaClientes();
+  const { formatDateTime } = useUtils();
   const [entradas, setEntradas] = useState([]);
   const [saidas, setSaidas] = useState([]);
 
@@ -79,7 +81,7 @@ function Inicio() {
                   {item.quantidade}
                 </TableCell>
                 <TableCell style={{ textAlign: "center" }}>
-                  {item.data}
+                  {formatDateTime(item.data)}
                 </TableCell>
                 <TableCell style={{ textAlign: "center" }}>
                   {item.local}
@@ -116,7 +118,7 @@ function Inicio() {
                   {item.quantidade}
                 </TableCell>
                 <TableCell style={{ textAlign: "center" }}>
-                  {item.data}
+                  {formatDateTime(item.data)}
                 </TableCell>
                 <TableCell style={{ textAlign: "center" }}>
                   {item.local}

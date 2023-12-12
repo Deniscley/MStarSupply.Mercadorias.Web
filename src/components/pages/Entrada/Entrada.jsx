@@ -198,7 +198,7 @@ function Entrada() {
                     value={formik.values.meuCampoSelecao}
                   >
                     <option value="">Selecione...</option>
-                    {mercadorias.data.map((option) => (
+                    {mercadorias.map((option) => (
                       <option key={option.id} value={option.id}>
                         {option.nome}
                       </option>
