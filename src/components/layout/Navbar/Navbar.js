@@ -9,7 +9,10 @@ function Navbar() {
         <div className={styles.logo}>SUPPLY CHAIN</div>
         <ul className={styles.list}>
           <li className={styles.item}>
-            <Link to="/">Mercadoria</Link>
+            <Link to="/">Início</Link>
+          </li>
+          <li className={styles.item}>
+            <Link to="/mercadoria">Mercadoria</Link>
           </li>
           <li className={styles.item}>
             <Link to="/entrada">Entrada</Link>

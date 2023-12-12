@@ -26,21 +26,23 @@ const mercadoria = "Mercadoria";
 const DEFAULT_OBJECT = {
   quantidade: "",
   dataHora: "",
+  local: "",
+  mercadoriaId: "",
 };
 
 export const mercadorias = {
   data: [
     {
       nome: "Mercadoria 3",
-      IdMercadoria: "4fd192da-5f74-494e-8e17-f2f73c21ba1b",
+      mercadoriaId: "4fd192da-5f74-494e-8e17-f2f73c21ba1b",
     },
     {
       nome: "Mercadoria 4",
-      IdMercadoria: "481503b5-f581-4523-b388-1fc5a83cc57b",
+      mercadoriaId: "481503b5-f581-4523-b388-1fc5a83cc57b",
     },
     {
       nome: "Mercadoria 5",
-      IdMercadoria: "2c30cfc9-c3b4-4eca-8c0a-790042ed91d2",
+      mercadoriaId: "2c30cfc9-c3b4-4eca-8c0a-790042ed91d2",
     },
   ],
 };
@@ -65,10 +67,10 @@ function Entrada() {
   const formik = useFormik({
     initialValues: { ...DEFAULT_OBJECT },
     validationSchema: Yup.object({
-      quantidade: Yup.number().required(),
-      dataHora: Yup.date().required(),
-      local: Yup.string().required(),
-      IdMercadoria: Yup.string().required(),
+      quantidade: Yup.number().required("O campo quantidade é obrigatório"),
+      dataHora: Yup.date().required("O campo data e hora é obrigatório"),
+      local: Yup.string().required("O campo local é obrigatório"),
+      mercadoriaId: Yup.string().required("O campo mercadoria é obrigatório"),
     }),
     onSubmit: (data, { resetForm }) => {
       const values = {
@@ -106,7 +108,7 @@ function Entrada() {
                     fullWidth
                     color="primary"
                     inputProps={{ maxLength: 15, min: 1 }}
-                    {...formik.getFieldProps("numero")}
+                    {...formik.getFieldProps("quantidade")}
                     error={
                       formik.touched.quantidade && !!formik.errors.quantidade
                     }
@@ -179,15 +181,9 @@ function Entrada() {
           </Grid>
 
           <Grid item xs={12} md={6}>
-            <Box sx={{ paddingLeft: "2rem" }}>
+            <Box>
               <Box mr={1}>
-                <Typography
-                  variant="body2"
-                  color="primary"
-                  // className={classes.label}
-                >
-                  {mercadoria}
-                </Typography>
+                <Typography variant="body2">{mercadoria}</Typography>
               </Box>
               <FormControl fullWidth>
                 {/* <DropdownSelectOne
@@ -206,17 +202,34 @@ function Entrada() {
                     formik.touched.idMercadoria && formik.errors.idMercadoria
                   }
                 /> */}
-                <select {...formik.getFieldProps("idMercadoria")}>
-                  <option value="">Selecione...</option>
-                  {mercadorias.data.map((option) => (
-                    <option
-                      key={option.IdMercadoria}
-                      value={option.IdMercadoria}
-                    >
-                      {option.nome}
-                    </option>
-                  ))}
-                </select>
+                <Box sx={{ paddingTop: "1rem" }}>
+                  <select
+                    id="idMercadoria"
+                    title="Mercadoria"
+                    className={styles.inputSelect}
+                    {...formik.getFieldProps("idMercadoria")}
+                  >
+                    <option value="">Selecione...</option>
+                    {mercadorias.data.map((option) => (
+                      <option
+                        key={option.IdMercadoria}
+                        value={option.IdMercadoria}
+                      >
+                        {option.nome}
+                      </option>
+                    ))}
+                  </select>
+                </Box>
+                <FormHelperText
+                  hidden={
+                    !formik.touched.idMercadoria || !formik.errors.idMercadoria
+                  }
+                  error={
+                    formik.touched.idMercadoria && !!formik.errors.idMercadoria
+                  }
+                >
+                  {formik.errors.idMercadoria}
+                </FormHelperText>
               </FormControl>
             </Box>
           </Grid>

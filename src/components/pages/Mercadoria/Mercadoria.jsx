@@ -49,10 +49,11 @@ function Mercadoria() {
   const formik = useFormik({
     initialValues: { ...DEFAULT_OBJECT },
     validationSchema: Yup.object({
-      nome: Yup.string().required(),
-      numero: Yup.number().required(),
-      fabricante: Yup.string().required(),
-      tipo: Yup.string().required(),
+      nome: Yup.string().required("O campo nome é obrigatório"),
+      numero: Yup.number().required("O campo número de registro é obrigatório"),
+      fabricante: Yup.string().required("O campo fabricante é obrigatório"),
+      tipo: Yup.string().required("O campo tipo é obrigatório"),
+      descricao: Yup.string().required("O campo descrição é obrigatório"),
     }),
     onSubmit: (data, { resetForm }) => {
       const values = {

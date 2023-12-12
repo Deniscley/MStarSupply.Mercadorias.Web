@@ -14,12 +14,19 @@ const useMercadoriaClients = () => {
     []
   );
 
+  const cadastrarSaida = useCallback(
+    (data) =>
+      axios.put(`${process.env.URI}/api/mercadoria/inserir-saida`, data),
+    []
+  );
+
   return useCallback(
     () => ({
       cadastrarMercadoria,
       cadastrarEntrada,
+      cadastrarSaida,
     }),
-    [cadastrarMercadoria, cadastrarEntrada]
+    [cadastrarMercadoria, cadastrarEntrada, cadastrarSaida]
   );
 };
 
