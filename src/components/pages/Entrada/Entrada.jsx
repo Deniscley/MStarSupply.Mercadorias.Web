@@ -41,7 +41,7 @@ function Entrada() {
       .retornarMercadorias()
       .then(
         (response) => {
-          setMercadorias(response.data);
+          setMercadorias(response?.data);
         },
         () => {
           AlertError();
@@ -198,7 +198,7 @@ function Entrada() {
                     value={formik.values.meuCampoSelecao}
                   >
                     <option value="">Selecione...</option>
-                    {mercadorias.map((option) => (
+                    {mercadorias?.map((option) => (
                       <option key={option.id} value={option.id}>
                         {option.nome}
                       </option>

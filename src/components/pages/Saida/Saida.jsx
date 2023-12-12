@@ -41,7 +41,7 @@ function Saida() {
       .retornarMercadorias()
       .then(
         (response) => {
-          setMercadorias(response.data);
+          setMercadorias(response?.data);
         },
         () => {
           AlertError();
@@ -93,7 +93,7 @@ function Saida() {
       <Box className={styles.container} ml={3} mr={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={12} mt={5}>
-            <h1>Cadastro de Saida</h1>
+            <h1>Cadastro de Saída</h1>
           </Grid>
 
           <Grid item xs={12} md={6}>
@@ -198,7 +198,7 @@ function Saida() {
                     value={formik.values.meuCampoSelecao}
                   >
                     <option value="">Selecione...</option>
-                    {mercadorias.map((option) => (
+                    {mercadorias?.map((option) => (
                       <option key={option.id} value={option.id}>
                         {option.nome}
                       </option>
