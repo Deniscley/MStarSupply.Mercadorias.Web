@@ -1,17 +1,18 @@
 import { useCallback } from "react";
 import axios from "axios";
 
+const URI = "https://localhost:44304";
+
 const useEntradaClients = () => {
   const cadastrarEntrada = useCallback(
-    (data) =>
-      axios.post("https://localhost:44304/api/entrada/inserir-entrada", data),
+    (data) => axios.post(`${URI}/api/entrada/inserir-entrada`, data),
     []
   );
 
   const retornarEntradas = useCallback(
     (id) =>
       axios
-        .get("https://localhost:44304/api/entrada/obter-todas-entradas")
+        .get(`${URI}/api/entrada/obter-todas-entradas`)
         .then((response) =>
           response?.data ? response : { data: { ...response } }
         ),
