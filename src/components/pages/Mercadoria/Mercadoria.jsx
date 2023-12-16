@@ -120,15 +120,18 @@ function Mercadoria() {
                     inputProps={{ maxLength: 15, min: 1 }}
                     {...formik.getFieldProps("numeroRegistro")}
                     error={
-                      formik.touched.numero && !!formik.errors.numeroRegistro
+                      formik.touched.numeroRegistro &&
+                      !!formik.errors.numeroRegistro
                     }
                   />
                   <FormHelperText
                     hidden={
-                      !formik.touched.numero || !formik.errors.numeroRegistro
+                      !formik.touched.numeroRegistro ||
+                      !formik.errors.numeroRegistro
                     }
                     error={
-                      formik.touched.numero && !!formik.errors.numeroRegistro
+                      formik.touched.numeroRegistro &&
+                      !!formik.errors.numeroRegistro
                     }
                   >
                     {formik.errors.numeroRegistro}
