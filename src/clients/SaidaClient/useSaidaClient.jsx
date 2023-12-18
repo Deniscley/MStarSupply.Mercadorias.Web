@@ -9,10 +9,10 @@ const useSaidaClients = () => {
     []
   );
 
-  const retornarSaidas = useCallback(
-    (id) =>
+  const obterItensDaPagina = useCallback(
+    (data) =>
       axios
-        .get(`${URI}/api/saida/obter-todas-saidas`)
+        .get(`${URI}/api/saida/obter-todas-saidas?pagina=${data}`)
         .then((response) =>
           response?.data ? response : { data: { ...response } }
         ),
@@ -22,9 +22,9 @@ const useSaidaClients = () => {
   return useCallback(
     () => ({
       cadastrarSaida,
-      retornarSaidas,
+      obterItensDaPagina,
     }),
-    [cadastrarSaida, retornarSaidas]
+    [cadastrarSaida, obterItensDaPagina]
   );
 };
 

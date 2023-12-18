@@ -16,9 +16,13 @@ import {
   Box,
   Button,
   Grid,
+  Typography,
 } from "@mui/material";
+import Paginacao from "../Paginacao/Paginacao";
+import styles from "./RelatorioPDF.module.css";
 
 const exportar = "Exportar para PDF";
+const noRecordsFound = "Nenhum registro encontrado.";
 
 const RelatorioPDF = () => {
   const clientesEntrada = useEntradaClientes();
@@ -29,10 +33,12 @@ const RelatorioPDF = () => {
 
   const [entradas, setEntradas] = useState([]);
   const [saidas, setSaidas] = useState([]);
+  const [entradaPaginaAtual, setEntradaPaginaAtual] = useState(1);
+  const [saidaPaginaAtual, setSaidaPaginaAtual] = useState(1);
 
-  const buscarEntradas = () => {
+  const buscarEntradas = (novaPagina) => {
     clientesEntrada()
-      .retornarEntradas()
+      .obterItensDaPagina(novaPagina)
       .then(
         (response) => {
           setEntradas(response?.data);
@@ -43,9 +49,9 @@ const RelatorioPDF = () => {
       );
   };
 
-  const buscarSaidas = () => {
+  const buscarSaidas = (novaPagina) => {
     clientesSaida()
-      .retornarSaidas()
+      .obterItensDaPagina(novaPagina)
       .then(
         (response) => {
           setSaidas(response?.data);
@@ -56,10 +62,20 @@ const RelatorioPDF = () => {
       );
   };
 
+  const handlePaginacaoEntradaChange = (event, novaPagina) => {
+    setEntradaPaginaAtual(novaPagina);
+    buscarEntradas(novaPagina);
+  };
+
+  const handlePaginacaoSaidaChange = (event, novaPagina) => {
+    setSaidaPaginaAtual(novaPagina);
+    buscarSaidas(novaPagina);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
-      await buscarEntradas();
-      await buscarSaidas();
+      await buscarEntradas(1);
+      await buscarSaidas(1);
     };
 
     fetchData().catch((error) => error.message);
@@ -144,6 +160,21 @@ const RelatorioPDF = () => {
             ))}
           </TableBody>
         </Table>
+        {entradas.length === 0 && (
+          <Box mb={1} className={styles.recordTextFound}>
+            <Typography variant="subtitle1" color="primary">
+              <b>{noRecordsFound}</b>
+            </Typography>
+          </Box>
+        )}
+
+        <Box mt={1} mb={1} display="flex" justifyContent="center">
+          <Paginacao
+            paginaAtual={entradaPaginaAtual}
+            totalPaginas={10}
+            onChange={handlePaginacaoEntradaChange}
+          />
+        </Box>
       </TableContainer>
       <Box minWidth={170} m={1}>
         <Button
@@ -194,6 +225,21 @@ const RelatorioPDF = () => {
             ))}
           </TableBody>
         </Table>
+        {saidas.length === 0 && (
+          <Box mb={1} className={styles.recordTextFound}>
+            <Typography variant="subtitle1" color="primary">
+              <b>{noRecordsFound}</b>
+            </Typography>
+          </Box>
+        )}
+
+        <Box mt={1} mb={1} display="flex" justifyContent="center">
+          <Paginacao
+            paginaAtual={saidaPaginaAtual}
+            totalPaginas={10}
+            onChange={handlePaginacaoSaidaChange}
+          />
+        </Box>
       </TableContainer>
       <Box minWidth={170} m={1}>
         <Button
