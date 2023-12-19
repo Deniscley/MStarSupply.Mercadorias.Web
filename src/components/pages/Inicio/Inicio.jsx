@@ -67,9 +67,6 @@ function Inicio() {
       );
   };
 
-  console.log("Entradas: ", entradas);
-  console.log("Saídas: ", saidas);
-
   useEffect(() => {
     const fetchData = async () => {
       await buscarEntradas();
