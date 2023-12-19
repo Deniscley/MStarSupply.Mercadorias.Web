@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-// import styles from "./Inicio.module.css";
 import useEntradaClientes from "../../../clients/EntradaClient/useEntradaClient";
 import useSaidaClientes from "../../../clients/SaidaClient/useSaidaClient";
 import { Chart } from "react-google-charts";

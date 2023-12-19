@@ -92,8 +92,8 @@ const RelatorioPDF = () => {
         "PNG",
         40,
         40,
-        canvas.width * 0.35,
-        canvas.height * 0.35
+        canvas.width * 0.45,
+        canvas.height * 0.45
       );
       pdf.save("relatorio_entrada.pdf");
     });
@@ -110,8 +110,8 @@ const RelatorioPDF = () => {
         "PNG",
         40,
         40,
-        canvas.width * 0.35,
-        canvas.height * 0.35
+        canvas.width * 0.45,
+        canvas.height * 0.45
       );
       pdf.save("relatorio_saida.pdf");
     });
