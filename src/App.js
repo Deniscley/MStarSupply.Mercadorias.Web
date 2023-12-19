@@ -6,6 +6,7 @@ import Saida from "./components/pages/Saida/Saida";
 import Container from "./components/layout/Container/Container";
 import Navbar from "./components/layout/Navbar/Navbar";
 import Footer from "./components/layout/Footer/Footer";
+import Relatorio from "./components/pages/Relatorio/Relatorio";
 import Inicio from "./components/pages/Inicio/Inicio";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Container customClass="min-height">
         <Routes>
           <Route exact path="/" element={<Inicio />} />
+          <Route exact path="/relatorio" element={<Relatorio />} />
           <Route exact path="/mercadoria" element={<Mercadoria />} />
           <Route exact path="/entrada" element={<Entrada />} />
           <Route exact path="/saida" element={<Saida />} />

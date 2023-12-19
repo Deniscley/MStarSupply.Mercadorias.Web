@@ -70,7 +70,7 @@ function Mercadoria() {
   });
 
   return (
-    <>
+    <section>
       <Box className={styles.container} ml={3} mr={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={12} mt={5}>
@@ -244,8 +244,11 @@ function Mercadoria() {
           </Box>
         </Box>
       </Box>
-      {sucesso && <AlertSucess mensagem={mensagemRetornada} />}
-    </>
+
+      <Box mt={1}>
+        {sucesso && <AlertSucess mensagem={mensagemRetornada} />}
+      </Box>
+    </section>
   );
 }
 

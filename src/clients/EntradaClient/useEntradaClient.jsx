@@ -12,7 +12,17 @@ const useEntradaClients = () => {
   const obterItensDaPagina = useCallback(
     (data) =>
       axios
-        .get(`${URI}/api/entrada/obter-todas-entradas?pagina=${data}`)
+        .get(`${URI}/api/entrada/obter-itens-pagina?pagina=${data}`)
+        .then((response) =>
+          response?.data ? response : { data: { ...response } }
+        ),
+    []
+  );
+
+  const obterTodosItensDaPagina = useCallback(
+    () =>
+      axios
+        .get(`${URI}/api/entrada/obter-todos-itens-pagina`)
         .then((response) =>
           response?.data ? response : { data: { ...response } }
         ),
@@ -23,8 +33,9 @@ const useEntradaClients = () => {
     () => ({
       cadastrarEntrada,
       obterItensDaPagina,
+      obterTodosItensDaPagina,
     }),
-    [cadastrarEntrada, obterItensDaPagina]
+    [cadastrarEntrada, obterItensDaPagina, obterTodosItensDaPagina]
   );
 };
 
