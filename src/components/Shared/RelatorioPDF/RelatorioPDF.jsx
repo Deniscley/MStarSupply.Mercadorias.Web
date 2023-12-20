@@ -176,20 +176,23 @@ const RelatorioPDF = () => {
           />
         </Box>
       </TableContainer>
-      <Box minWidth={170} m={1}>
-        <Button
-          variant="contained"
-          color="primary"
-          title="Adicionar"
-          fullWidth
-          onClick={gerarPDFEntrada}
-        >
-          {exportar}
-        </Button>
+
+      <Box display="flex" justifyContent="center" alignItems="center" mt={4}>
+        <Box minWidth={170} m={1}>
+          <Button
+            variant="contained"
+            color="primary"
+            title="Adicionar"
+            fullWidth
+            onClick={gerarPDFEntrada}
+          >
+            {exportar}
+          </Button>
+        </Box>
       </Box>
 
       <Grid container spacing={3}>
-        <Grid item xs={12} md={12} mt={4} mb={2}>
+        <Grid item xs={12} md={12} mt={6} mb={2}>
           <h2>Relatório de Saída</h2>
         </Grid>
       </Grid>
@@ -241,16 +244,19 @@ const RelatorioPDF = () => {
           />
         </Box>
       </TableContainer>
-      <Box minWidth={170} m={1}>
-        <Button
-          variant="contained"
-          color="primary"
-          title="Adicionar"
-          fullWidth
-          onClick={gerarPDFSaida}
-        >
-          {exportar}
-        </Button>
+
+      <Box display="flex" justifyContent="center" alignItems="center" mt={4}>
+        <Box minWidth={170} m={1}>
+          <Button
+            variant="contained"
+            color="primary"
+            title="Adicionar"
+            fullWidth
+            onClick={gerarPDFSaida}
+          >
+            {exportar}
+          </Button>
+        </Box>
       </Box>
     </>
   );

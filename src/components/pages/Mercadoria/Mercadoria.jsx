@@ -76,149 +76,139 @@ function Mercadoria() {
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <Box>
-            <Typography variant="body2" mb={2}>
-              {nome}
-            </Typography>
+          <Typography variant="body2" mb={2}>
+            {nome}
+          </Typography>
 
-            <FormControl fullWidth>
-              <TextField
-                id="nome"
-                title="Nome"
-                minRows={1}
-                fullWidth
-                color="primary"
-                inputProps={{ maxLength: 60, min: 1 }}
-                {...formik.getFieldProps("nome")}
-                error={formik.touched.nome && !!formik.errors.nome}
-              />
-              <FormHelperText
-                hidden={!formik.touched.nome || !formik.errors.nome}
-                error={formik.touched.nome && !!formik.errors.nome}
-              >
-                {formik.errors.nome}
-              </FormHelperText>
-            </FormControl>
-          </Box>
+          <FormControl fullWidth>
+            <TextField
+              id="nome"
+              title="Nome"
+              minRows={1}
+              fullWidth
+              color="primary"
+              inputProps={{ maxLength: 60, min: 1 }}
+              {...formik.getFieldProps("nome")}
+              error={formik.touched.nome && !!formik.errors.nome}
+            />
+            <FormHelperText
+              hidden={!formik.touched.nome || !formik.errors.nome}
+              error={formik.touched.nome && !!formik.errors.nome}
+            >
+              {formik.errors.nome}
+            </FormHelperText>
+          </FormControl>
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <Box>
-            <Typography variant="body2">{numero}</Typography>
+          <Typography variant="body2">{numero}</Typography>
 
-            <FormControl fullWidth>
-              <Box sx={{ paddingTop: "1rem" }}>
-                <TextField
-                  id="numeroRegistro"
-                  title="Numero Registro"
-                  type="number"
-                  minRows={1}
-                  fullWidth
-                  color="primary"
-                  inputProps={{ maxLength: 15, min: 1 }}
-                  {...formik.getFieldProps("numeroRegistro")}
-                  error={
-                    formik.touched.numeroRegistro &&
-                    !!formik.errors.numeroRegistro
-                  }
-                />
-                <FormHelperText
-                  hidden={
-                    !formik.touched.numeroRegistro ||
-                    !formik.errors.numeroRegistro
-                  }
-                  error={
-                    formik.touched.numeroRegistro &&
-                    !!formik.errors.numeroRegistro
-                  }
-                >
-                  {formik.errors.numeroRegistro}
-                </FormHelperText>
-              </Box>
-            </FormControl>
-          </Box>
-        </Grid>
-
-        <Grid item xs={12} md={6}>
-          <Box>
-            <Typography variant="body2" mb={2}>
-              {fabricante}
-            </Typography>
-
-            <FormControl fullWidth>
+          <FormControl fullWidth>
+            <Box sx={{ paddingTop: "1rem" }}>
               <TextField
-                id="fabricante"
-                title="Fabricante"
+                id="numeroRegistro"
+                title="Numero Registro"
+                type="number"
                 minRows={1}
                 fullWidth
                 color="primary"
-                inputProps={{ maxLength: 60, min: 1 }}
-                {...formik.getFieldProps("fabricante")}
-                error={formik.touched.fabricante && !!formik.errors.fabricante}
+                inputProps={{ maxLength: 15, min: 1 }}
+                {...formik.getFieldProps("numeroRegistro")}
+                error={
+                  formik.touched.numeroRegistro &&
+                  !!formik.errors.numeroRegistro
+                }
               />
               <FormHelperText
-                hidden={!formik.touched.fabricante || !formik.errors.fabricante}
-                error={formik.touched.fabricante && !!formik.errors.fabricante}
+                hidden={
+                  !formik.touched.numeroRegistro ||
+                  !formik.errors.numeroRegistro
+                }
+                error={
+                  formik.touched.numeroRegistro &&
+                  !!formik.errors.numeroRegistro
+                }
               >
-                {formik.errors.fabricante}
+                {formik.errors.numeroRegistro}
               </FormHelperText>
-            </FormControl>
-          </Box>
+            </Box>
+          </FormControl>
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <Box>
-            <Typography variant="body2" mb={2}>
-              {tipo}
-            </Typography>
+          <Typography variant="body2" mb={2}>
+            {fabricante}
+          </Typography>
 
-            <FormControl fullWidth>
-              <TextField
-                id="tipo"
-                title="tipo"
-                minRows={1}
-                fullWidth
-                color="primary"
-                inputProps={{ maxLength: 60, min: 1 }}
-                {...formik.getFieldProps("tipo")}
-                error={formik.touched.tipo && !!formik.errors.tipo}
-              />
-              <FormHelperText
-                hidden={!formik.touched.tipo || !formik.errors.tipo}
-                error={formik.touched.tipo && !!formik.errors.tipo}
-              >
-                {formik.errors.tipo}
-              </FormHelperText>
-            </FormControl>
-          </Box>
+          <FormControl fullWidth>
+            <TextField
+              id="fabricante"
+              title="Fabricante"
+              minRows={1}
+              fullWidth
+              color="primary"
+              inputProps={{ maxLength: 60, min: 1 }}
+              {...formik.getFieldProps("fabricante")}
+              error={formik.touched.fabricante && !!formik.errors.fabricante}
+            />
+            <FormHelperText
+              hidden={!formik.touched.fabricante || !formik.errors.fabricante}
+              error={formik.touched.fabricante && !!formik.errors.fabricante}
+            >
+              {formik.errors.fabricante}
+            </FormHelperText>
+          </FormControl>
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <Box>
-            <Typography variant="body2" mb={2}>
-              {descricao}
-            </Typography>
+          <Typography variant="body2" mb={2}>
+            {tipo}
+          </Typography>
 
-            <FormControl fullWidth>
-              <TextField
-                id="descricao"
-                title="descricao"
-                minRows={1}
-                fullWidth
-                color="primary"
-                multiline
-                inputProps={{ maxLength: 255, min: 1 }}
-                {...formik.getFieldProps("descricao")}
-                error={formik.touched.tipo && !!formik.errors.descricao}
-              />
-              <FormHelperText
-                hidden={!formik.touched.descricao || !formik.errors.descricao}
-                error={formik.touched.descricao && !!formik.errors.descricao}
-              >
-                {formik.errors.descricao}
-              </FormHelperText>
-            </FormControl>
-          </Box>
+          <FormControl fullWidth>
+            <TextField
+              id="tipo"
+              title="tipo"
+              minRows={1}
+              fullWidth
+              color="primary"
+              inputProps={{ maxLength: 60, min: 1 }}
+              {...formik.getFieldProps("tipo")}
+              error={formik.touched.tipo && !!formik.errors.tipo}
+            />
+            <FormHelperText
+              hidden={!formik.touched.tipo || !formik.errors.tipo}
+              error={formik.touched.tipo && !!formik.errors.tipo}
+            >
+              {formik.errors.tipo}
+            </FormHelperText>
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={12} md={6}>
+          <Typography variant="body2" mb={2}>
+            {descricao}
+          </Typography>
+
+          <FormControl fullWidth>
+            <TextField
+              id="descricao"
+              title="descricao"
+              minRows={1}
+              fullWidth
+              color="primary"
+              multiline
+              inputProps={{ maxLength: 255, min: 1 }}
+              {...formik.getFieldProps("descricao")}
+              error={formik.touched.tipo && !!formik.errors.descricao}
+            />
+            <FormHelperText
+              hidden={!formik.touched.descricao || !formik.errors.descricao}
+              error={formik.touched.descricao && !!formik.errors.descricao}
+            >
+              {formik.errors.descricao}
+            </FormHelperText>
+          </FormControl>
         </Grid>
       </Grid>
 

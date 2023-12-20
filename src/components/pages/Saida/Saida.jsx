@@ -98,126 +98,112 @@ function Saida() {
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <Box>
-            <Typography variant="body2">{quantidade}</Typography>
+          <Typography variant="body2">{quantidade}</Typography>
 
-            <FormControl fullWidth>
-              <Box sx={{ paddingTop: "1rem" }}>
-                <TextField
-                  id="quantidade"
-                  title="Quantidade"
-                  type="number"
-                  minRows={1}
-                  fullWidth
-                  color="primary"
-                  inputProps={{ maxLength: 15, min: 1 }}
-                  {...formik.getFieldProps("quantidade")}
-                  error={
-                    formik.touched.quantidade && !!formik.errors.quantidade
-                  }
-                />
-                <FormHelperText
-                  hidden={
-                    !formik.touched.quantidade || !formik.errors.quantidade
-                  }
-                  error={
-                    formik.touched.quantidade && !!formik.errors.quantidade
-                  }
-                >
-                  {formik.errors.quantidade}
-                </FormHelperText>
-              </Box>
-            </FormControl>
-          </Box>
-        </Grid>
-
-        <Grid item xs={12} md={6}>
-          <Box>
-            <Typography variant="body2">{dataHora}</Typography>
-
-            <FormControl fullWidth>
-              <Box sx={{ paddingTop: "1rem" }}>
-                <Input
-                  type="datetime-local"
-                  name="birthdatetime"
-                  fullWidth
-                  className={styles.inputData}
-                  {...formik.getFieldProps("data")}
-                  error={formik.touched.data && !!formik.errors.data}
-                />
-                <FormHelperText
-                  hidden={!formik.touched.data || !formik.errors.data}
-                  error={formik.touched.data && !!formik.errors.data}
-                >
-                  {formik.errors.data}
-                </FormHelperText>
-              </Box>
-            </FormControl>
-          </Box>
-        </Grid>
-
-        <Grid item xs={12} md={6}>
-          <Box>
-            <Typography variant="body2" mb={2}>
-              {local}
-            </Typography>
-
-            <FormControl fullWidth>
+          <FormControl fullWidth>
+            <Box sx={{ paddingTop: "1rem" }}>
               <TextField
-                id="local"
-                title="Local"
+                id="quantidade"
+                title="Quantidade"
+                type="number"
                 minRows={1}
                 fullWidth
                 color="primary"
-                inputProps={{ maxLength: 60, min: 1 }}
-                {...formik.getFieldProps("local")}
-                error={formik.touched.local && !!formik.errors.local}
+                inputProps={{ maxLength: 15, min: 1 }}
+                {...formik.getFieldProps("quantidade")}
+                error={formik.touched.quantidade && !!formik.errors.quantidade}
               />
               <FormHelperText
-                hidden={!formik.touched.local || !formik.errors.local}
-                error={formik.touched.local && !!formik.errors.local}
+                hidden={!formik.touched.quantidade || !formik.errors.quantidade}
+                error={formik.touched.quantidade && !!formik.errors.quantidade}
               >
-                {formik.errors.local}
+                {formik.errors.quantidade}
               </FormHelperText>
-            </FormControl>
-          </Box>
+            </Box>
+          </FormControl>
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <Box>
-            <Box mr={1}>
-              <Typography variant="body2">{mercadoria}</Typography>
-            </Box>
-            <FormControl fullWidth>
-              <Box sx={{ paddingTop: "1rem" }}>
-                <select
-                  id="MercadoriaId"
-                  title="Mercadoria"
-                  className={styles.inputSelect}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.meuCampoSelecao}
-                >
-                  <option value="">Selecione...</option>
-                  {mercadorias?.map((option) => (
-                    <option key={option.id} value={option.id}>
-                      {option.nome}
-                    </option>
-                  ))}
-                </select>
-              </Box>
+          <Typography variant="body2">{dataHora}</Typography>
+
+          <FormControl fullWidth>
+            <Box sx={{ paddingTop: "1rem" }}>
+              <Input
+                type="datetime-local"
+                name="birthdatetime"
+                fullWidth
+                className={styles.inputData}
+                {...formik.getFieldProps("data")}
+                error={formik.touched.data && !!formik.errors.data}
+              />
               <FormHelperText
-                hidden={
-                  !formik.touched.MercadoriaId || !formik.errors.MercadoriaId
-                }
-                error={
-                  formik.touched.MercadoriaId && !!formik.errors.MercadoriaId
-                }
+                hidden={!formik.touched.data || !formik.errors.data}
+                error={formik.touched.data && !!formik.errors.data}
               >
-                {formik.errors.MercadoriaId}
+                {formik.errors.data}
               </FormHelperText>
-            </FormControl>
+            </Box>
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={12} md={6}>
+          <Typography variant="body2" mb={2}>
+            {local}
+          </Typography>
+
+          <FormControl fullWidth>
+            <TextField
+              id="local"
+              title="Local"
+              minRows={1}
+              fullWidth
+              color="primary"
+              inputProps={{ maxLength: 60, min: 1 }}
+              {...formik.getFieldProps("local")}
+              error={formik.touched.local && !!formik.errors.local}
+            />
+            <FormHelperText
+              hidden={!formik.touched.local || !formik.errors.local}
+              error={formik.touched.local && !!formik.errors.local}
+            >
+              {formik.errors.local}
+            </FormHelperText>
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={12} md={6}>
+          <Box mr={1}>
+            <Typography variant="body2">{mercadoria}</Typography>
           </Box>
+          <FormControl fullWidth>
+            <Box sx={{ paddingTop: "1rem" }}>
+              <select
+                id="MercadoriaId"
+                title="Mercadoria"
+                className={styles.inputSelect}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.meuCampoSelecao}
+              >
+                <option value="">Selecione...</option>
+                {mercadorias?.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.nome}
+                  </option>
+                ))}
+              </select>
+            </Box>
+            <FormHelperText
+              hidden={
+                !formik.touched.MercadoriaId || !formik.errors.MercadoriaId
+              }
+              error={
+                formik.touched.MercadoriaId && !!formik.errors.MercadoriaId
+              }
+            >
+              {formik.errors.MercadoriaId}
+            </FormHelperText>
+          </FormControl>
         </Grid>
       </Grid>
 

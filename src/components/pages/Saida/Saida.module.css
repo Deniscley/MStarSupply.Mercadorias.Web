@@ -21,3 +21,21 @@
   padding-right: 0.6rem;
   background-color: #efefef;
 }
+
+@media screen and (max-width: 1215px) {
+  .inputSelect {
+    width: 30.5rem;
+  }
+}
+
+@media screen and (max-width: 1014px) {
+  .inputSelect {
+    width: 24.5rem;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .inputSelect {
+    width: 45rem;
+  }
+}

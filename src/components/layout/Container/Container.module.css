@@ -18,3 +18,21 @@
   flex-direction: column;
   justify-content: flex-start;
 }
+
+@media screen and (max-width: 1215px) {
+  .container {
+    width: 1000px;
+  }
+}
+
+@media screen and (max-width: 1014px) {
+  .container {
+    width: 800px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    width: 700px;
+  }
+}
